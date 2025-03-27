@@ -2,3 +2,8 @@ What is the theoretical worst-case running time of the algorithm you implemented
 (i.e. in Θ-notation), expressed in terms of the number of words n in the input
 file? Justify your answer.
 
+For each string in words.txt, the value is normalized and a frequency hash is generated. This results
+in O(nm) time, with m being the length of the longest word in the worst-case scenario and n being the 
+number of words in words.txt. Following this, the insertion into the HashMap has a worst-case time
+complexity of O(n^2) if all the words map to the same anagram. The dominating time complexity here is 
+O(n^2) in the worst-case scenario.

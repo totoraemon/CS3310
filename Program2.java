@@ -1,8 +1,25 @@
+/**************************************************************/
+/* Joseline Ly                                                */
+/* Login ID: 017241510                                        */
+/* CS 3310, Spring 2025                                       */
+/* Programming Assignment 2                                   */
+/* Program2 class: takes in a file and returns a .txt file    */
+/* with lists of anagrams                                     */
+/**************************************************************/
+
 import java.io.*;
 import java.util.*;
 import java.text.Normalizer;
 
 public class Program2 {
+
+    /*************************************************/
+    /* Method: main                                  */
+    /* Purpose: call method fileRead()               */
+    /* Parameters:                                   */
+    /*  String[] args: unused, input of file name    */
+    /* Returns: void: no return                      */
+    /*************************************************/
     public static void main (String[] args) {
         try {
             fileRead();
@@ -11,9 +28,20 @@ public class Program2 {
         }
     }
 
-    // Warning "resource" for HashMap raw type
-    // Warning "unused" for variable k in lambda expression
+    /*************************************************************************/
+    /* Method: fileRead                                                      */
+    /* Purpose: Read file input/ouput names and apply getCharCount() and     */
+    /*          normalize strings with removeAccents                         */
+    /* Parameters:                                                           */
+    /* Returns: void:       no return                                        */
+    /*************************************************************************/
+    
     @SuppressWarnings({ "resource", "unused" })
+    /**
+     * Suppress "resource" warning for HashMap raw type
+     * Suppress "unused" warning for variable k in lambda expression
+     * @throws IOException
+     */
     public static void fileRead() throws IOException {
         Scanner scnr = new Scanner(System.in);
         System.out.print("Enter an input file: ");
@@ -41,14 +69,16 @@ public class Program2 {
                 groups.computeIfAbsent(freqCount, k -> new ArrayList<>()).add(line);
             }
         }
-        
         catch (Exception e) {
             System.out.print("Error while opening file.");
             e.printStackTrace();
         }
 
-        // For each list of strings in Map groups, check if its size is greater than 1.
-        // If it is, print the entire list of anagrams. Otherwise, skip since group is not anagram.
+        /**
+         * For each list of strings in Map groups, check if its size is greater than 1.
+         * If it is, print the entire list of anagrams.
+         * Otherwise, skip it since the group is not an anagram. 
+        */
         for (List<String> group : groups.values()) {
             if (group.size() > 1) {
                 writer.write(group.toString());
@@ -58,19 +88,33 @@ public class Program2 {
         scnr.close();
     }
 
-    private static String getCharCount(String s) {
-        // Frequency array for characters a - z
+    /*************************************************************************/
+    /* Method: getCharCount                                                  */
+    /* Purpose: Obtain frequency count of characters in string format        */
+    /* Parameters:                                                           */
+    /*  String input:         word to be counted                             */
+    /* Returns: string:       string format of frequency count per character */
+    /*************************************************************************/
+    private static String getCharCount(String input) {
+        // Initial size for frequency array for characters a - z.
         int[] freq = new int[27];
 
-        // For each character in the string, create a frequency count
-        for (char c : s.toCharArray()) {
+        // For each character in the string, create a frequency count.
+        for (char c : input.toCharArray()) {
             freq[c - 'a']++;
         }
 
-        // Convert frequency array into string of numbers and return
+        // Convert frequency array into string of numbers and return string.
         return Arrays.toString(freq);
     }
 
+    /*************************************************************************/
+    /* Method: removeAccents                                                 */
+    /* Purpose: Remove accents from characters to normalize values           */
+    /* Parameters:                                                           */
+    /*  String input:         word to be modified                            */
+    /* Returns: string:       string without accented characters             */
+    /*************************************************************************/
     private static String removeAccents(String input) {
         if (input == null) {
             return null;
