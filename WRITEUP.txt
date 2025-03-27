@@ -1,0 +1,4 @@
+What is the theoretical worst-case running time of the algorithm you implemented
+(i.e. in Θ-notation), expressed in terms of the number of words n in the input
+file? Justify your answer.
+
