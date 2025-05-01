@@ -1,0 +1,17 @@
+ANALYSIS
+
+The recursive formula begins by instantiating minCost[i][j] to represent
+the minimum cost to travel from post i to post j, rentalCosts[i][j] to
+represent the direct rental cost from post i to post j, and mid to 
+designate an intermediate post between post i and post j. Then, the
+formula used is minCost[i][j] = min(minCost[i][mid] + rentalCosts[mid][j])
+for all i ≤ mid < j. For each value of mid, the cost is the sum of:
+minimum cost to travel from i to mid, and the direct rental cost from mid
+to j. My program then selects the mid that minimizes this resulting cost.
+
+Theoretically, the outer loop runs over every possibly length from 2 to
+totalPosts, producing a runtime of O(n). The middle loop goes over all 
+potential starting posts for each route length, also resulting in a time 
+complexity of O(n). Finally, the inner loop runs for each pair of starting
+and ending posts to iterate over all possible intermediate posts. Since
+the time complexity of this loop is also O(n), the total runtime is O(n^3).
